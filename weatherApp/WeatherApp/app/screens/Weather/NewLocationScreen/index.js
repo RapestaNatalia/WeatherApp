@@ -1,8 +1,8 @@
 import React from 'react';
-import {View} from 'react-native';
+import {Container} from './styled';
 
 const NewLocationScreen= ({})=>{
-    return <View></View>
+    return <Container/>
 
 }
 export default NewLocationScreen;
