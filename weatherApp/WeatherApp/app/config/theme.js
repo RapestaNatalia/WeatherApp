@@ -1,5 +1,5 @@
 import { Dimensions, Platform } from 'react-native';
-import { calculateREMforDevice } from '../helpers/font';
+import { calculateREMforDevice } from 'helpers/font';
 
 const calculatedRem = calculateREMforDevice(Dimensions.get('window'));
 
