@@ -1,7 +1,7 @@
 import React from 'react';
-import {View} from 'react-native';
+import {Container} from './styled';
 const MainScreen= ({})=>{
-    return <View></View>
+    return <Container/>
 
 }
 export default MainScreen;
