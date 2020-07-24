@@ -1,4 +1,4 @@
 const strings={
-headerTitle:'Clima...'
+headerTitle:'Clima'
 }
 export default strings;

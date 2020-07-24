@@ -6,6 +6,7 @@ const WeatherStack = createStackNavigator();
 import MainScreen from 'screens/Weather/MainScreen';
 import NewLocationScreen from 'screens/Weather/NewLocationScreen';
 import strings from 'config/constants/strings';
+import HeaderTitle from 'components/HeaderTitle';
 const WeatherStackNavigator = () => {
     return (
       <WeatherStack.Navigator
@@ -16,14 +17,14 @@ const WeatherStackNavigator = () => {
           name={screenRoutes.MAIN_WEATHER_SCREEN}
           component={MainScreen}
           options={({ navigation }) => ({
-            title: strings.headerTitle
+            headerTitle: () => <HeaderTitle title={strings.headerTitle} />
           })}
         />
             <WeatherStack.Screen
           name={screenRoutes.SEARCH_LOCATIONS_SCREEN}
           component={NewLocationScreen}
           options={({ navigation }) => ({
-            headerTitle: () => <HeaderTitle title={strings.weather.title} />
+            headerTitle: () => <HeaderTitle title={strings.headerTitle} />
           })}
         />
       </WeatherStack.Navigator>
