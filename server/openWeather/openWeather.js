@@ -11,6 +11,7 @@ const weather_key=process.env.WEATHER_KEY || ''  ;
 
   async function getCurrentWeather(city){
     console.log('process variables',weather_key,weather_url);
+    console.log('current city',city);
     try {
         const resp = await fetchNode(`${weather_url}weather?q=${city}&units=metric&lang=es&APPID=${weather_key}&lang=es`);
         const json = await resp.json();

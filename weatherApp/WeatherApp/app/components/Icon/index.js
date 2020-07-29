@@ -21,14 +21,14 @@ const Icon = ({
   enabled = true
 }) => {
   const Wrapper = onPress ? TouchableWrapper : PlainWrapper;
-
+  const active = enabled?enabled:true
   return (
     <Wrapper
       className={className}
       onPress={() => onPress()}
       left={left}
       right={right}
-      enabled={enabled}>
+      enabled={active}>
       <IcomoonIcon name={name} size={size} color={color} />
     </Wrapper>
   );

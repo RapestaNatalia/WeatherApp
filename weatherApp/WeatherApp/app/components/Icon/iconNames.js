@@ -29,7 +29,9 @@ const IconNames = {
   Target: 'target',
   Theater: 'theater',
   ThunderStorm: 'thunder-storm',
-  Tree: 'tree'
+  Tree: 'tree',
+  Add:'add',
+  Delete:'delete'
 };
 
 export default IconNames;
