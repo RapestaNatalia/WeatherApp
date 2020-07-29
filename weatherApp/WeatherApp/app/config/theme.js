@@ -33,7 +33,8 @@ const theme = {
     doveGray: '#666666',
     genoa: '#157672',
     tundora: '#4a4a4a',
-    catskillWhite: '#e7f4f4'
+    catskillWhite: '#e7f4f4',
+    sky:'#8CC8FF'
   },
   fonts: {
     regular: (forStyled = true) => {

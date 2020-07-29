@@ -5,8 +5,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 const WeatherStack = createStackNavigator();
 import MainScreen from 'screens/Weather/MainScreen';
 import NewLocationScreen from 'screens/Weather/NewLocationScreen';
+import CityListScreen from 'screens/Weather/CityListScreen';
 import strings from 'config/constants/strings';
 import HeaderTitle from 'components/HeaderTitle';
+import IconNames from 'components/Icon/iconNames';
+import Icon from 'components/Icon';
 const WeatherStackNavigator = () => {
     return (
       <WeatherStack.Navigator
@@ -20,11 +23,36 @@ const WeatherStackNavigator = () => {
             headerTitle: () => <HeaderTitle title={strings.headerTitle} />
           })}
         />
-            <WeatherStack.Screen
+        <WeatherStack.Screen
           name={screenRoutes.SEARCH_LOCATIONS_SCREEN}
           component={NewLocationScreen}
           options={({ navigation }) => ({
-            headerTitle: () => <HeaderTitle title={strings.headerTitle} />
+            headerTitle: () => <HeaderTitle title={strings.headerTitle} />,
+            headerLeft: () => (
+              <Icon
+                left={10}
+                name={IconNames.ChevronLeft}
+                size={18}
+                color={theme.colors.mineShaft}
+                onPress={() => navigation.goBack()}
+              />
+            )
+          })}
+        />
+        <WeatherStack.Screen
+          name={screenRoutes.CITY_LIST_SCREEN}
+          component={CityListScreen}
+          options={({ navigation }) => ({
+            headerTitle: () => <HeaderTitle title={strings.headerTitle} />,
+            headerLeft: () => (
+              <Icon
+                left={10}
+                name={IconNames.ChevronLeft}
+                size={18}
+                color={theme.colors.mineShaft}
+                onPress={() => navigation.goBack()}
+              />
+            )
           })}
         />
       </WeatherStack.Navigator>
