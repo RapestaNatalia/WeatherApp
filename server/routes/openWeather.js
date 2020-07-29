@@ -12,7 +12,7 @@ api_weather.get('/current/:city?', async(req, res) => {
             var remote_ip = req.headers['x-real-ip'] || req.connection.remoteAddress  || req.headers['x-forwarded-for'];
             end_ip=remote_ip.split(':')[3];
             console.log(end_ip);
-            const loc=await location.getLocation('186.141.202.15');
+            const loc=await location.getLocation('xxx.xxx.xxx.xx');
             city=loc.city;
             console.log('city ip-api',city);
             
@@ -32,7 +32,7 @@ api_weather.get('/forest/:city?', async(req, res) => {
             var remote_ip = req.headers['x-real-ip'] || req.connection.remoteAddress  || req.headers['x-forwarded-for'];
             end_ip=remote_ip.split(':')[3];
             console.log(end_ip);
-            const loc=await location.getLocation('186.141.202.15');
+            const loc=await location.getLocation('xxx.xxx.xxx.xx');
             city=loc.city;
             console.log('city ip-api',city);
             
