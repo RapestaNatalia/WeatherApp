@@ -20,3 +20,6 @@ Steps to execute application:
         IP_API_URL='http://api.ipapi.com/'
         IP_API_KEY='####'
     -npm start
+# Test server part:
+    -cd server
+    -npm test

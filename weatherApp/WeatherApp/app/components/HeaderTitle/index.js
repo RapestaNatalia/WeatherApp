@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Wrapper, Title } from './styled';
 
-const HeaderTitle = ({ title }) => {
+const HeaderTitle = ({ title,left,right }) => {
   return (
-    <Wrapper>
+    <Wrapper left={left} right={right}>
       <Title>{title}</Title>
     </Wrapper>
   );

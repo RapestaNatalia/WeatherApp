@@ -18,6 +18,7 @@ const CityListScreen= ({navigation})=>{
     const renderItem = ({ item }) => {
         return (
           <LocalityOption
+            key={item.id}
             onPress={() => {
              const currentAlreadyExist=searchById(currentWeather,item.id);
              const forestAlreadyExist=searchById(forestWeather,item.id);

@@ -5,7 +5,8 @@ import WeatherList from 'components/Weather/WeatherList/';
 import CurrentWeather from 'components/Weather/CurrentWeather/';
 import {
     getCurrentWeatherPosition,
-    getForecastWeatherPosition
+    getForecastWeatherPosition,
+    refreshValuesFromWeather
   } from 'actions/weather';
 import Images from 'assets/images/index/';
 import { useSelector, useDispatch } from 'react-redux';
@@ -23,6 +24,7 @@ const MainScreen= ({navigation})=>{
         dispatch(getForecastWeatherPosition());
     }, []);
     function searchLocation () {
+      dispatch(refreshValuesFromWeather());
       navigation.navigate(ScreenRoutes.SEARCH_LOCATIONS_SCREEN);
     }
     return (

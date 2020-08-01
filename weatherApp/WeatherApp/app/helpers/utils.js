@@ -25,4 +25,3 @@ export function getWeekday(timestamp) {
 export const searchById = (myArray,key) =>{
   return myArray.find(element => element.id === key);
 }  
-  
