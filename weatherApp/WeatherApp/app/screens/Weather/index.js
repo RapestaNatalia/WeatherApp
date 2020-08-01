@@ -10,6 +10,15 @@ import strings from 'config/constants/strings';
 import HeaderTitle from 'components/HeaderTitle';
 import IconNames from 'components/Icon/iconNames';
 import Icon from 'components/Icon';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs([
+  'Warning: componentWillMount is deprecated',
+  'Warning: componentWillReceiveProps is deprecated',
+  'Warning: componentWillReceiveProps has been renamed',
+  'Warning: componentWillMount has been renamed',
+  'Module RCTImageLoader requires',
+]);
 const WeatherStackNavigator = () => {
     return (
       <WeatherStack.Navigator
@@ -27,7 +36,7 @@ const WeatherStackNavigator = () => {
           name={screenRoutes.SEARCH_LOCATIONS_SCREEN}
           component={NewLocationScreen}
           options={({ navigation }) => ({
-            headerTitle: () => <HeaderTitle title={strings.headerTitle} />,
+            headerTitle: () => <HeaderTitle right={20} title={strings.headerTitle} />,
             headerLeft: () => (
               <Icon
                 left={10}
@@ -43,7 +52,7 @@ const WeatherStackNavigator = () => {
           name={screenRoutes.CITY_LIST_SCREEN}
           component={CityListScreen}
           options={({ navigation }) => ({
-            headerTitle: () => <HeaderTitle title={strings.headerTitle} />,
+            headerTitle: () => <HeaderTitle right={20} title={strings.headerTitle} />,
             headerLeft: () => (
               <Icon
                 left={10}

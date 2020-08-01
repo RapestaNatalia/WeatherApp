@@ -17,6 +17,9 @@ export const Item = styled.Text`
   padding:16px;
 
 `;
+export const RightButtons=styled.TouchableHighlight`
+
+`;
 export const LocalityOption = styled.TouchableOpacity`
 flex-direction: row;
 border: 0.5px solid ${({ theme }) => theme.colors.dustyGray};

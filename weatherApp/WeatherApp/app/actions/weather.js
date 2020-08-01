@@ -14,7 +14,9 @@ export const FORESCAST_WEATHER_POSITION_ERROR =
   'FORESCAST_WEATHER_POSITION_ERROR';
 export const CURRENT_WEATHER_POSITION_ERROR = 'CURRENT_WEATHER_POSITION_ERROR';
 export const CHANGE_SELECTED_LOCATION = 'CHANGE_SELECTED_LOCATION';
-
+export const DELETE_CURRENT_WEATHER="DELETE_CURRENT_WEATHER";
+export const DELETE_FOREST_WEATHER="DELETE_FOREST_WEATHER";
+export const DELETE_CITY='DELETE_CITY';
 export function requestCurrentWeatherPosition() {
   return {
     type: REQUEST_CURRENT_WEATHER_POSITION
@@ -26,11 +28,11 @@ export function requestForecastWeatherPosition() {
   };
 }
 
-export function currentWeatherPositionSuccess(result) {
-  return {
-    type: CURRENT_WEATHER_POSITION_SUCCESS,
-    payload: { result }
-  };
+export function currentWeatherPositionSuccess(result,position) {
+    return {
+      type: CURRENT_WEATHER_POSITION_SUCCESS,
+      payload: { result,position}
+    };
 }
 export function forecastWeatherPositionSuccess(result) {
   return {
@@ -58,6 +60,7 @@ export function getForecastWeatherPosition(city) {
      conditions=conditions+'/'+city;;
   }
   return (dispatch, getState) => {
+
     dispatch(requestForecastWeatherPosition());
     const apiUrl = `${CONFIG.SERVER}${conditions}`;
 
@@ -118,6 +121,8 @@ export function getCurrentWeatherPosition(city) {
      conditions=conditions+'/'+city;
   }
   return (dispatch, getState) => {
+    const {temporalCurrent}=getState().weatherReducer;
+
     dispatch(requestCurrentWeatherPosition());
     const apiUrl = `${CONFIG.SERVER}${conditions}`;
 
@@ -125,8 +130,20 @@ export function getCurrentWeatherPosition(city) {
       .then(result => {
         if(result.data!=""){
           const prepareResult = prepareCurrentResultToSave(result.data);
-          dispatch(currentWeatherPositionSuccess(prepareResult));
-        }else{
+          if(Object.keys(temporalCurrent).length>0){
+            const resultPosition=temporalCurrent[prepareResult.id]
+            if(resultPosition>=0){            
+              dispatch(currentWeatherPositionSuccess(prepareResult,resultPosition));   
+            }
+            else{
+              dispatch(currentWeatherPositionSuccess(prepareResult,Object.keys(temporalCurrent).length));
+
+            }
+          }else{
+            dispatch(currentWeatherPositionSuccess(prepareResult,0));  
+
+          }
+          }else{
           dispatch(
             currentWeatherPositionFailed(strings.no_results)
           )
@@ -155,7 +172,7 @@ function prepareCurrentResultToSave(result) {
 }
 
 export function getLocations() {
-  return require('assets/raw/city.list.min.json');
+  return require('assets/raw/current.city.list.min.json');
 }
 
 export function changeSelected(selectedId){
@@ -167,5 +184,43 @@ export function requestChangeSelected(selectedId){
   return{
     type:CHANGE_SELECTED_LOCATION,
     payload:selectedId
+  }
+}
+export function deleteCurrentWeather(temporal){
+  return{
+    type:DELETE_CURRENT_WEATHER,
+    payload:temporal
+  }
+}
+export function deleteForestWeather(){
+  return{
+    type:DELETE_FOREST_WEATHER
+  }
+}
+export function refreshValuesFromWeather(){
+  return (dispatch, getState) => { 
+    const {currentWeather}=getState().weatherReducer;
+    let temporalCurrent={};
+    currentWeather.map((d,index)=>{
+      temporalCurrent[d.id]=index
+    })
+    
+    dispatch(deleteCurrentWeather(temporalCurrent));
+    dispatch(deleteForestWeather());
+    currentWeather.map(d=>{
+      dispatch(getCurrentWeatherPosition(d.city));
+      dispatch(getForecastWeatherPosition(d.city));
+    })
+  }
+}
+export function dispatchDeleteCity(position){
+  return{
+    type:DELETE_CITY,
+    payload:position
+  }
+}
+export function deleteACity(id){
+  return (dispatch, getState) => { 
+      dispatch(dispatchDeleteCity(id));
   }
 }

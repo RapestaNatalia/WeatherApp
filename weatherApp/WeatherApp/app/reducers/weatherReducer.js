@@ -5,7 +5,10 @@ import {
     CURRENT_WEATHER_POSITION_SUCCESS,
     CURRENT_WEATHER_POSITION_ERROR,
     FORESCAST_WEATHER_POSITION_ERROR,
-    CHANGE_SELECTED_LOCATION
+    CHANGE_SELECTED_LOCATION,
+    DELETE_CURRENT_WEATHER,
+    DELETE_FOREST_WEATHER,
+    DELETE_CITY
   } from 'actions/weather/';
   
   const initialState = {
@@ -14,7 +17,8 @@ import {
     currentWeather: [],
     forestWeather: [],
     selectedId:0,
-    error: ''
+    error: '',
+    temporalCurrent:{}
   };
   export function weatherReducer(state = initialState, action) {
     switch (action.type) {
@@ -35,11 +39,18 @@ import {
           forestWeather: [...state.forestWeather,action.payload.result]
         };
       case CURRENT_WEATHER_POSITION_SUCCESS:
-        return {
-          ...state,
-          isCurrentWeatherFetching: false,
-          currentWeather: [...state.currentWeather,action.payload.result]
-        };
+          let temp=state.currentWeather
+          temp[action.payload.position]=action.payload.result
+          let tempCurrent={};
+          temp.map((d,index)=>{
+            tempCurrent[d.id]=index
+          })
+          return{
+            ...state,
+            isCurrentWeatherFetching: false,
+            currentWeather:temp,
+            temporalCurrent:tempCurrent
+          }   
       case CURRENT_WEATHER_POSITION_ERROR:
         return {
           ...state,
@@ -47,7 +58,7 @@ import {
           error: action.err,
           currentWeather: [...state.currentWeather]
         };
-      case FORESCAST_WEATHER_POSITION_ERROR:
+       case FORESCAST_WEATHER_POSITION_ERROR:
         return {
           ...state,
           isForestWeatherFetching: false,
@@ -59,6 +70,33 @@ import {
           ...state,  
           selectedId:action.payload
         };
+       case DELETE_CURRENT_WEATHER:
+        return{
+          ...state,
+          temporalCurrent:action.payload
+        };
+        case DELETE_FOREST_WEATHER:
+        return{
+          ...state,
+          forestWeather: []
+        };
+        case DELETE_CITY:
+          let newArray=[]
+          state.currentWeather.map((val)=>{
+            if(val.id!==action.payload){
+              newArray.push(val)
+            }
+          })
+          let tempCurrent2={};
+          newArray.map((d,index)=>{
+            tempCurrent2[d.id]=index
+          })
+          return{
+            ...state,
+            currentWeather:newArray,
+            temporalCurrent:tempCurrent2
+
+          }
       default:
         return state;
     }
