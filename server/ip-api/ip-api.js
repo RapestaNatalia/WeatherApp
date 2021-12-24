@@ -1,18 +1,16 @@
+const fetch = require("node-fetch-commonjs");
 
-const fetch = require('node-fetch');
-const ip_api_url = process.env.IP_API_URL || 'http://api.ipapi.com/' ;
-const ip_api_key = process.env.IP_API_KEY || ''  ;
+const ip_api_url = process.env.IP_API_URL || "http://ip-api.com/json/";
 
-async function getLocation (end_ip){
-    try{
-    const url = `${ip_api_url}${end_ip}?access_key=${ip_api_key}`    
-    console.log('url',url);
-    const resp = await fetch( url);
+async function getLocation(end_ip) {
+  try {
+    const url = `${ip_api_url}${end_ip}`;
+    const resp = await fetch(url);
     const json = await resp.json();
-    return json;    
-    }catch (error) {
-        console.error(error)
-      }
+    return json;
+  } catch (error) {
+    console.error(error);
   }
+}
 
-  module.exports={getLocation}
+module.exports = { getLocation };
