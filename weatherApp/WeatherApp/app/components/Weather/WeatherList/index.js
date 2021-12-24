@@ -7,15 +7,15 @@ import {
   DayWeek,
   TypeWeather,
   WeatherImageContainer,
-  TempContainer
+  TempContainer,
 } from './styled';
 import React from 'react';
 import FlatList from 'components/FlatList/';
 import theme from 'config/theme/';
 import Icon from 'components/Icon/';
 import Images from 'assets/images/';
-const WeatherList = ({ forecast }) => {
-  const renderItem = ({ item }) => {
+const WeatherList = ({forecast}) => {
+  const renderItem = ({item}) => {
     return (
       <ForecastContainer>
         <TempContainer>

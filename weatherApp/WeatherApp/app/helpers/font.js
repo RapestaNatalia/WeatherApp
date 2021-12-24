@@ -12,20 +12,19 @@
  * @param {number} height - Device height
  * @returns {number} - REM unit for this device
  */
-export const calculateREMforDevice = ({ width }) => {
-    const PhM = 380;
-    const TaWidth = 768;
-    const MSW = 450;
-    const MSV = 1;
-    const MTV = 0.7;
-  
-    let remValue = width / PhM;
-  
-    if (width > MSW) {
-      const multiplier = ((width - MSW) / (TaWidth - MSW)) * (MTV - MSV) + MSV; // Linear eq
-      remValue = remValue * multiplier;
-    }
-  
-    return remValue;
-  };
-  
+export const calculateREMforDevice = ({width}) => {
+  const PhM = 380;
+  const TaWidth = 768;
+  const MSW = 450;
+  const MSV = 1;
+  const MTV = 0.7;
+
+  let remValue = width / PhM;
+
+  if (width > MSW) {
+    const multiplier = ((width - MSW) / (TaWidth - MSW)) * (MTV - MSV) + MSV; // Linear eq
+    remValue = remValue * multiplier;
+  }
+
+  return remValue;
+};

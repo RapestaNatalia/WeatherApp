@@ -1,11 +1,11 @@
-import { Dimensions, Platform } from 'react-native';
-import { calculateREMforDevice } from 'helpers/font';
+import {Dimensions, Platform} from 'react-native';
+import {calculateREMforDevice} from 'helpers/font';
 
 const calculatedRem = calculateREMforDevice(Dimensions.get('window'));
 
 const platformFactor = Platform.OS === 'ios' ? 1.1 : 1;
 
-const scale = size => {
+const scale = (size) => {
   let newSize = (size * calculatedRem * platformFactor).toFixed(2);
   return `${newSize.toString()}px`;
 };
@@ -34,7 +34,7 @@ const theme = {
     genoa: '#157672',
     tundora: '#4a4a4a',
     catskillWhite: '#e7f4f4',
-    sky:'#8CC8FF'
+    sky: '#8CC8FF',
   },
   fonts: {
     regular: (forStyled = true) => {
@@ -45,7 +45,7 @@ const theme = {
           `;
         }
         return {
-          fontFamily: 'Source Sans Pro'
+          fontFamily: 'Source Sans Pro',
         };
       }
 
@@ -54,7 +54,7 @@ const theme = {
       }
 
       return {
-        fontFamily: 'regular'
+        fontFamily: 'regular',
       };
     },
     semiBold: (forStyled = true) => {
@@ -68,7 +68,7 @@ const theme = {
 
         return {
           fontFamily: 'Source Sans Pro',
-          fontWeight: '600'
+          fontWeight: '600',
         };
       }
 
@@ -77,7 +77,7 @@ const theme = {
       }
 
       return {
-        fontFamily: 'SemiBold'
+        fontFamily: 'SemiBold',
       };
     },
     bold: (forStyled = true) => {
@@ -91,7 +91,7 @@ const theme = {
 
         return {
           fontFamily: 'Source Sans Pro',
-          fontWeight: '800'
+          fontWeight: '800',
         };
       }
 
@@ -100,7 +100,7 @@ const theme = {
       }
 
       return {
-        fontFamily: 'Bold'
+        fontFamily: 'Bold',
       };
     },
     italic: (forStyled = true) => {
@@ -114,7 +114,7 @@ const theme = {
 
         return {
           fontFamily: 'Source Sans Pro',
-          fontStyle: 'italic'
+          fontStyle: 'italic',
         };
       }
 
@@ -123,9 +123,9 @@ const theme = {
       }
 
       return {
-        fontFamily: 'Italic'
+        fontFamily: 'Italic',
       };
-    }
+    },
   },
   sizes: {
     s10: scale(10),
@@ -146,10 +146,10 @@ const theme = {
     s35: scale(35),
     s40: scale(40),
     s50: scale(50),
-    s60: scale(60)
+    s60: scale(60),
   },
   scale,
-  scaledFontSize
+  scaledFontSize,
 };
 
 export default theme;

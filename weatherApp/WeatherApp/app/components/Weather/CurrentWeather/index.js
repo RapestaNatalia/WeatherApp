@@ -4,13 +4,19 @@ import {
   ImageWeather,
   Temperature,
   DayWeek,
-  City
+  City,
 } from './styled';
 import React from 'react';
 import Icon from 'components/Icon/';
 import theme from 'config/theme/';
 
-const CurrentWeather = ({ iconName, typeWeather, temperature, dayWeek,city }) => {
+const CurrentWeather = ({
+  iconName,
+  typeWeather,
+  temperature,
+  dayWeek,
+  city,
+}) => {
   return (
     <Container>
       <ImageWeather>
@@ -24,7 +30,7 @@ const CurrentWeather = ({ iconName, typeWeather, temperature, dayWeek,city }) =>
       <TypeWeather>{typeWeather}</TypeWeather>
       <Temperature>{temperature}</Temperature>
       <DayWeek>{dayWeek}</DayWeek>
-  <City>{city}</City>
+      <City>{city}</City>
     </Container>
   );
 };

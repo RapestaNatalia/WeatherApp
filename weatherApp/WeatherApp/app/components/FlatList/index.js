@@ -1,7 +1,7 @@
 import React from 'react';
-import { Listings, Wrapper } from './styled';
+import {Listings, Wrapper} from './styled';
 
-const FlatList = ({ data, renderItem }) => {
+const FlatList = ({data, renderItem}) => {
   return (
     <Wrapper>
       <Listings

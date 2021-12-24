@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
+import {createIconSetFromIcoMoon} from 'react-native-vector-icons';
 import theme from 'config/theme';
 import icoMoonConfig from '../../assets/fonts/selection.json';
 
-import { PlainWrapper, TouchableWrapper } from './styled';
+import {PlainWrapper, TouchableWrapper} from './styled';
 
-export { default as IconNames } from './iconNames';
+export {default as IconNames} from './iconNames';
 
 const IcomoonIcon = createIconSetFromIcoMoon(icoMoonConfig);
 
@@ -18,10 +18,10 @@ const Icon = ({
   onPress,
   left,
   right,
-  enabled = true
+  enabled = true,
 }) => {
   const Wrapper = onPress ? TouchableWrapper : PlainWrapper;
-  const active = enabled?enabled:true
+  const active = enabled ? enabled : true;
   return (
     <Wrapper
       className={className}
