@@ -1,14 +1,14 @@
 # WeatherApp
 
+This Weather App shows you:
+
+    -  The current weather of your city.
+    -  The forecasted weather of your city.
+    -  Configure a list of cities (max. 5) to know the weather of these     cities.
+    - Add and delete cities from this list.
+
 Steps to execute application:
 
-# Client:
-    -Replace xx in config/environment/index  server's url with your personal ip
-    'http://192.xx.xx.x:3000/v1/'
-    -cd weatherApp
-    -npm install
-    -npx react-native run-android
-    
 # Server:
     -cd server
     -npm install
@@ -18,8 +18,19 @@ Steps to execute application:
         WEATHER_URL= 'https://api.openweathermap.org/data/2.5/'
         WEATHER_KEY= '####'
         IP_API_URL='http://api.ipapi.com/'
-        IP_API_KEY='####'
     -npm start
+
+# Public the server for testing the mobile app. In this case we need the public ip.
+    -https://ngrok.com/ is a good option. Press get started for free and follow the instruction (download, unzip ngrox and connect it with the port of the server)
+
+# Client:
+    -Replace ngrox-url in config/environment/index  server's url with the ngrox url obtained in the previous steps
+    'ngrox-url/v1/'
+    -cd weatherApp
+    -npm install
+    -npx react-native run-android
+    
+
 # Test server part:
     -cd server
     -npm test
