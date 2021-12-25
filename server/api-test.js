@@ -1,6 +1,6 @@
-var expect = require("chai").expect,
-  request = require("supertest"),
-  api = request("http://localhost:3000/v1");
+const  expect = require("chai").expect;
+const  request = require("supertest");
+const  api = request("ngrox-url/v1");
 
 describe("GET /current", () => {
   it("respond with json containing the current weather of your city", async () => {
