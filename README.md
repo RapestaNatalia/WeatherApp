@@ -7,6 +7,8 @@ This Weather App shows you:
     3. Configure a list of cities (max. 5) to know the weather of these cities.
     4. Add and delete cities from this list.
 
+![Main Screen](images/main-screen.png)
+
 Steps to execute application:
 
 ## Server:
@@ -19,21 +21,27 @@ Steps to execute application:
         WEATHER_KEY= '####'
         IP_API_URL='http://api.ipapi.com/'
     5.  npm start
-
 ## Public the server for testing the mobile app. In this case we need the public ip.
-    1. https://ngrok.com/ is a good option. 
-    Press get started for free and follow the instruction 
-    (download, unzip ngrox and connect it with the port of the server).
+ 
+[Ngrox system](https://ngrok.com) is a good option. 
+    Press **get started for free** and follow the instructions: 
+    download, unzip ngrox and connect it with the port of the server.
 
 ## Client:
     1. Replace ngrox-url in config/environment/index  server's url for the ngrox url obtained in the previous steps
     'ngrox-url/v1/'
-    2. cd weatherApp
+    2. cd weatherApp/WeatherApp
     3. npm install
     4. npx react-native run-android
+    5. cd ios
+    6. pod install
+    7. cd ..
+    8. npx react-native run-ios
     
 
 ## Test server part - external api:
     1. Replace ngrox-url in api-test.js file for the ngrox url obtained in the previous steps
     2.  cd server
     3.  npm test
+
+

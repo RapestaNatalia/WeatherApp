@@ -19,11 +19,10 @@ export const Item = styled.Text`
 export const RightButtons = styled.TouchableHighlight``;
 export const LocalityOption = styled.TouchableOpacity`
 flex-direction: row;
-border: 0.5px solid ${({theme}) => theme.colors.dustyGray};
+border: 1px solid ${({theme}) => theme.colors.dustyGray};
 height: 64px;
 width:100%
 background: ${({theme}) => theme.colors.catskillWhite};
-
 align-items: center;`;
 
 export const WeatherImageContainer = styled.View`
