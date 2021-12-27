@@ -19,9 +19,15 @@ import Fetching from 'components/ActivityIndicator/';
 import IconNames from 'components/Icon/iconNames';
 import Icon from 'components/Icon';
 import ScreenRoutes from 'config/constants/screenRoutes';
+import {getCurrentSelector,getForecastedSelector,selectedIdSelector,isForestWeatherFetchingSelector,isCurrentWeatherFetchingSelector} from '../../../reducers/selectors';
+
 const MainScreen = ({navigation}) => {
-  const weatherReducer = useSelector((state) => state.weatherReducer);
-  const {selectedId} = useSelector((state) => state.weatherReducer);
+  const currentWeather = useSelector(getCurrentSelector);
+  const forestWeather = useSelector(getForecastedSelector);
+  const isCurrentWeatherFetching = useSelector(isCurrentWeatherFetchingSelector);
+  const isForestWeatherFetching = useSelector(isForestWeatherFetchingSelector);
+  const selectedId = useSelector(selectedIdSelector);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,12 +40,12 @@ const MainScreen = ({navigation}) => {
   }
   return (
     <Container>
-      {!weatherReducer.isCurrentWeatherFetching &&
-        weatherReducer.currentWeather.length > 0 && (
+      {!isCurrentWeatherFetching &&
+        currentWeather.length > 0 && (
           <ImageWeather
             source={
-              weatherReducer.currentWeather[selectedId].icon
-                ? Images.weather[weatherReducer.currentWeather[selectedId].icon]
+              currentWeather[selectedId].icon
+                ? Images.weather[currentWeather[selectedId].icon]
                     .background
                 : null
             }>
@@ -53,39 +59,39 @@ const MainScreen = ({navigation}) => {
             </ButtonContainer>
             <CurrentWeather
               iconName={
-                weatherReducer.currentWeather[selectedId].icon
+                currentWeather[selectedId].icon
                   ? Images.weather[
-                      weatherReducer.currentWeather[selectedId].icon
+                      currentWeather[selectedId].icon
                     ].iconName
                   : null
               }
-              dayWeek={weatherReducer.currentWeather[selectedId].weekday}
+              dayWeek={currentWeather[selectedId].weekday}
               temperature={
-                weatherReducer.currentWeather[selectedId].temp
-                  ? `${weatherReducer.currentWeather[selectedId].temp} ºC`
+                currentWeather[selectedId].temp
+                  ? `${currentWeather[selectedId].temp} ºC`
                   : null
               }
               typeWeather={
-                weatherReducer.currentWeather[selectedId].description
+                currentWeather[selectedId].description
               }
               city={
-                weatherReducer.currentWeather[selectedId].city
-                  ? weatherReducer.currentWeather[selectedId].city
+                currentWeather[selectedId].city
+                  ? currentWeather[selectedId].city
                   : null
               }
             />
           </ImageWeather>
         )}
       <ForestContainer>
-        {weatherReducer.isForestWeatherFetching && (
+        {isForestWeatherFetching && (
           <Fetching
-            animating={weatherReducer.isForestWeatherFetching}
+            animating={isForestWeatherFetching}
             color={theme.colors.keppel}
           />
         )}
-        {!weatherReducer.isForestWeatherFetching &&
-          weatherReducer.forestWeather.length > 0 && (
-            <WeatherList forecast={weatherReducer.forestWeather[selectedId]} />
+        {!isForestWeatherFetching &&
+          forestWeather.length > 0 && (
+            <WeatherList forecast={forestWeather[selectedId]} />
           )}
       </ForestContainer>
     </Container>

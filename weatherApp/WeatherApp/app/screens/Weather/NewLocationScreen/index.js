@@ -21,14 +21,14 @@ import {Alert} from 'react-native';
 import strings from 'config/constants/strings';
 import {changeSelected, deleteACity} from 'actions/weather';
 import Swipeout from 'react-native-swipeout';
-
+import { getCurrentSelector } from '../../../reducers/selectors';
 const NewLocationScreen = ({navigation}) => {
-  const weatherReducer = useSelector((state) => state.weatherReducer);
+  const currentWeather = useSelector(getCurrentSelector);
 
   const dispatch = useDispatch();
 
   function addLocation() {
-    if (Object.keys(weatherReducer.currentWeather).length < 5) {
+    if (Object.keys(currentWeather).length < 5) {
       navigation.navigate(ScreenRoutes.CITY_LIST_SCREEN);
     } else {
       Alert.alert(strings.alert, strings.locality_limits);
@@ -106,7 +106,7 @@ const NewLocationScreen = ({navigation}) => {
       </IconContainer>
       <FlatListContainer>
         <FlatList
-          data={weatherReducer.currentWeather}
+          data={currentWeather}
           renderItem={renderItem}
         />
       </FlatListContainer>

@@ -6,7 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "start": "nodemon app.js",
-    "test":  "mocha 'api-test.js' --timeout 10000"
+    "test": "mocha 'api-test.js' --timeout 10000"
   },
   "keywords": [],
   "author": "",

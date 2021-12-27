@@ -4,7 +4,7 @@ app.use(express.json());
 app.set("trust proxy", true);
 
 const BASE_ROUTE = "/v1";
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 const weather_routes = require("./routes/openWeather");
 const location_routes = require("./routes/ip-api");

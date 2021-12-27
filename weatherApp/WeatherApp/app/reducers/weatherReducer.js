@@ -45,6 +45,7 @@ export function weatherReducer(state = initialState, action) {
       temp.map((d, index) => {
         tempCurrent[d.id] = index;
       });
+    
       return {
         ...state,
         isCurrentWeatherFetching: false,

@@ -1,7 +1,6 @@
 import CONFIG from 'config/environment/';
 import {fetchUrl} from 'helpers/network';
 import {getWeekday, groupBy, mostOcurrences} from 'helpers/utils/';
-import {Alert} from 'react-native';
 import strings from 'config/constants/strings';
 export const REQUEST_CURRENT_WEATHER_POSITION = 'REQUEST_WEATHER_POSITION';
 export const REQUEST_FORECAST_WEATHER_POSITION =

@@ -12,15 +12,14 @@ import theme from 'config/theme';
 import {searchById} from 'helpers/utils';
 import {Alert} from 'react-native';
 import strings from 'config/constants/strings';
+import {getForecastedSelector,getCurrentSelector} from '../../../reducers/selectors';
 
 const CityListScreen = ({navigation}) => {
   const [localities, setLocalities] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
-  const {currentWeather, forestWeather} = useSelector(
-    (state) => state.weatherReducer,
-  );
-
+  const currentWeather = useSelector(getCurrentSelector);
+  const forestWeather = useSelector(getForecastedSelector);
   const renderItem = ({item}) => {
     return (
       <LocalityOption
