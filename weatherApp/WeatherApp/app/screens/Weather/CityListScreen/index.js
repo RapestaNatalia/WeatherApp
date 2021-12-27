@@ -12,7 +12,10 @@ import theme from 'config/theme';
 import {searchById} from 'helpers/utils';
 import {Alert} from 'react-native';
 import strings from 'config/constants/strings';
-import {getForecastedSelector,getCurrentSelector} from '../../../reducers/selectors';
+import {
+  getForecastedSelector,
+  getCurrentSelector,
+} from '../../../reducers/selectors';
 
 const CityListScreen = ({navigation}) => {
   const [localities, setLocalities] = useState(false);

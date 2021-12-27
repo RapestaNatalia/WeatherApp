@@ -19,12 +19,20 @@ import Fetching from 'components/ActivityIndicator/';
 import IconNames from 'components/Icon/iconNames';
 import Icon from 'components/Icon';
 import ScreenRoutes from 'config/constants/screenRoutes';
-import {getCurrentSelector,getForecastedSelector,selectedIdSelector,isForestWeatherFetchingSelector,isCurrentWeatherFetchingSelector} from '../../../reducers/selectors';
+import {
+  getCurrentSelector,
+  getForecastedSelector,
+  selectedIdSelector,
+  isForestWeatherFetchingSelector,
+  isCurrentWeatherFetchingSelector,
+} from '../../../reducers/selectors';
 
 const MainScreen = ({navigation}) => {
   const currentWeather = useSelector(getCurrentSelector);
   const forestWeather = useSelector(getForecastedSelector);
-  const isCurrentWeatherFetching = useSelector(isCurrentWeatherFetchingSelector);
+  const isCurrentWeatherFetching = useSelector(
+    isCurrentWeatherFetchingSelector,
+  );
   const isForestWeatherFetching = useSelector(isForestWeatherFetchingSelector);
   const selectedId = useSelector(selectedIdSelector);
 
@@ -40,48 +48,41 @@ const MainScreen = ({navigation}) => {
   }
   return (
     <Container>
-      {!isCurrentWeatherFetching &&
-        currentWeather.length > 0 && (
-          <ImageWeather
-            source={
+      {!isCurrentWeatherFetching && currentWeather.length > 0 && (
+        <ImageWeather
+          source={
+            currentWeather[selectedId].icon
+              ? Images.weather[currentWeather[selectedId].icon].background
+              : null
+          }>
+          <ButtonContainer>
+            <Icon
+              name={IconNames.Search}
+              size={36}
+              color={theme.colors.black}
+              onPress={searchLocation}></Icon>
+          </ButtonContainer>
+          <CurrentWeather
+            iconName={
               currentWeather[selectedId].icon
-                ? Images.weather[currentWeather[selectedId].icon]
-                    .background
+                ? Images.weather[currentWeather[selectedId].icon].iconName
                 : null
-            }>
-            <ButtonContainer>
-              <Icon
-                name={IconNames.Search}
-                size={36}
-                color={theme.colors.black}
-                onPress={searchLocation}>
-              </Icon>
-            </ButtonContainer>
-            <CurrentWeather
-              iconName={
-                currentWeather[selectedId].icon
-                  ? Images.weather[
-                      currentWeather[selectedId].icon
-                    ].iconName
-                  : null
-              }
-              dayWeek={currentWeather[selectedId].weekday}
-              temperature={
-                currentWeather[selectedId].temp
-                  ? `${currentWeather[selectedId].temp} ºC`
-                  : null
-              }
-              typeWeather={
-                currentWeather[selectedId].description
-              }
-              city={
-                currentWeather[selectedId].city
-                  ? currentWeather[selectedId].city
-                  : null
-              }
-            />
-          </ImageWeather>
-        )}
+            }
+            dayWeek={currentWeather[selectedId].weekday}
+            temperature={
+              currentWeather[selectedId].temp
+                ? `${currentWeather[selectedId].temp} ºC`
+                : null
+            }
+            typeWeather={currentWeather[selectedId].description}
+            city={
+              currentWeather[selectedId].city
+                ? currentWeather[selectedId].city
+                : null
+            }
+          />
+        </ImageWeather>
+      )}
       <ForestContainer>
         {isForestWeatherFetching && (
           <Fetching
@@ -89,10 +90,9 @@ const MainScreen = ({navigation}) => {
             color={theme.colors.keppel}
           />
         )}
-        {!isForestWeatherFetching &&
-          forestWeather.length > 0 && (
-            <WeatherList forecast={forestWeather[selectedId]} />
-          )}
+        {!isForestWeatherFetching && forestWeather.length > 0 && (
+          <WeatherList forecast={forestWeather[selectedId]} />
+        )}
       </ForestContainer>
     </Container>
   );
