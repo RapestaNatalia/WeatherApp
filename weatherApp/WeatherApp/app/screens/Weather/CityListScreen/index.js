@@ -1,6 +1,7 @@
 import {Container, Item, LocalityOption} from './styled';
 import FlatList from 'components/FlatList';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback, useMemo} from 'react';
+import {Dimensions} from 'react-native';
 import {
   getLocations,
   getCurrentWeatherPosition,
@@ -13,14 +14,43 @@ import {searchById} from 'helpers/utils';
 import {Alert} from 'react-native';
 import strings from 'config/constants/strings';
 
+const {height} = Dimensions.get('window');
+const ITEM_HEIGHT = height * 0.25;
 const CityListScreen = ({navigation}) => {
   const [localities, setLocalities] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
+
   const {currentWeather, forestWeather} = useSelector(
     (state) => state.weatherReducer,
   );
 
+  const handleGetLocations = useCallback(async () => {
+    const values = await getLocations();
+    let result = values.map((localities) => ({
+      id: localities.id,
+      name: localities.name,
+    }));
+    setLocalities(result.sort((a, b) => a.name.localeCompare(b.name)));
+  }, []);
+
+  useEffect(() => {
+    if (!localities) {
+      handleGetLocations();
+    }
+    if (localities) {
+      setIsLoading(false);
+    }
+  }, [localities, isLoading]);
+
+  // List Logic performance optimization
+
+  const keyExtractor = (item, index) => item.id;
+  const getItemLayout = (data, index) => ({
+    length: ITEM_HEIGHT,
+    offset: ITEM_HEIGHT * index,
+    index,
+  });
   const renderItem = ({item}) => {
     return (
       <LocalityOption
@@ -42,29 +72,26 @@ const CityListScreen = ({navigation}) => {
       </LocalityOption>
     );
   };
-  useEffect(() => {
-    if (!localities) {
-      new Promise(function () {
-        const values = getLocations();
-        let result = values.map((localities) => ({
-          id: localities.id,
-          name: localities.name,
-        }));
-        setLocalities(result.sort((a, b) => a.name.localeCompare(b.name)));
-      });
-    }
-    if (localities) {
-      setIsLoading(false);
-    }
-  }, [localities, isLoading]);
+
+  const Localities = () => {
+    return useMemo(() => {
+      return (
+        <FlatList
+          data={localities}
+          renderItem={renderItem}
+          keyExtractor={keyExtractor}
+          getItemLayout={getItemLayout}
+        />
+      );
+    }, [localities]);
+  };
+
   return (
     <Container>
       {isLoading && (
         <Fetching animating={isLoading} color={theme.colors.keppel} />
       )}
-      {!isLoading && localities && (
-        <FlatList data={localities} renderItem={renderItem} />
-      )}
+      {!isLoading && localities && <Localities />}
     </Container>
   );
 };
